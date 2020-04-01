@@ -1,0 +1,9 @@
+<div class="favorites-locations">
+  <a *ngFor="let favorite of favorites"
+     [routerLink]="'/home'"
+     [queryParams]="{loc: favorite['name']}"
+     class="weather-banner">
+    <app-weather [location]="favorite"></app-weather>
+  </a>
+</div>
+

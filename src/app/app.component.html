@@ -1,0 +1,23 @@
+<div class="menu">
+  <h1>Weather</h1>
+  <nav mat-tab-nav-bar>
+      <a mat-tab-link
+         routerLink="home"
+         routerLinkActive #rla="routerLinkActive"
+         [active]="rla.isActive">
+        Home
+      </a>
+      <a mat-tab-link
+         routerLink="favorites"
+         routerLinkActive #rla="routerLinkActive"
+         [active]="rla.isActive">
+        Favorites
+      </a>
+  </nav>
+</div>
+
+<div class="container-content">
+  <router-outlet></router-outlet>
+</div>
+
+

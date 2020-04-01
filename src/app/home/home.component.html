@@ -1,0 +1,47 @@
+
+<form class="example-form">
+  <mat-form-field *ngIf="filteredLocations" class="example-full-width">
+    <input matInput
+           placeholder="Search Location"
+           aria-label="Select Location"
+           [matAutocomplete]="auto"
+           [formControl]="locationCtrl"
+           (keydown)="lockInvalidCharacters($event)">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-option *ngFor="let location of filteredLocations | async"
+                  [value]="location"
+                  (onSelectionChange)="selectLocation($event, location)">
+        <span>{{location.LocalizedName}}</span>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
+
+<div class="weather-wrapper" *ngIf="selectedLocation">
+  <div class="city-details">
+    <p>
+      <span class="city-title">{{selectedLocation.LocalizedName}}</span><br>
+      <span>{{selectedLocation.Country?.LocalizedName}}</span>
+    </p>
+    <button mat-button class="add-to-favorites" (click)="toggleFavorite()"
+            [class.favorite]="isLocationFavorite">{{!isLocationFavorite ? 'Add To Favorites' : 'Remove From Favorites'}}</button>
+  </div>
+
+  <div class="current-weather">
+    <span>{{currentWeather?.Temperature.Metric.Value}}&deg;{{currentWeather?.Temperature.Metric.Unit}}</span><br>
+    <img src="assets/icons/weather-icon-{{currentWeather?.WeatherIcon}}.svg" class="weather-icon" alt=""
+         onerror="this.src='assets/icons/no-icon.svg';this.onerror='';"/><br>
+    <span>{{currentWeather?.WeatherText}}</span>
+  </div>
+
+  <span>5 Days Forecast:</span>
+  <div class="forecast">
+    <div class="weather-banner" *ngFor="let day of forecastWeather?.DailyForecasts">
+      <span>{{day.Date | date:"EEE"}}</span><br>
+      <span>{{day.Temperature.Minimum.Value}}&deg;{{day.Temperature.Minimum.Unit}}</span> -
+      <span>{{day.Temperature.Maximum.Value}}&deg;{{day.Temperature.Maximum.Unit}}</span><br>
+      <img src="assets/icons/weather-icon-{{day.Day.Icon}}.svg" class="weather-icon" alt=""
+           onerror="this.src='assets/icons/no-icon.svg';this.onerror='';"/>
+    </div>
+  </div>
+</div>

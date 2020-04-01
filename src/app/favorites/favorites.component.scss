@@ -1,0 +1,12 @@
+.favorites-locations {
+  display: flex;
+  flex-wrap: wrap;
+  &:hover{
+    border-width: 2px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .favorites-locations{
+    flex-direction: column;
+  }
+}

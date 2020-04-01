@@ -1,0 +1,7 @@
+<div class="current-weather" *ngIf="currentWeather">
+  <span>{{location.name}}</span><br>
+  <span>{{currentWeather.Temperature.Metric.Value}}&deg;{{currentWeather?.Temperature.Metric.Unit}}</span><br>
+  <img src="assets/icons/weather-icon-{{currentWeather.WeatherIcon}}.svg" class="weather-icon" alt=""
+       onerror="this.src='assets/icons/no-icon.svg';this.onerror='';"/>
+  <div>{{currentWeather.WeatherText}}</div>
+</div>
